@@ -1,0 +1,7 @@
+{
+  "name": "mobistream-mb-proxy",
+  "version": "1.0.0",
+  "description": "MovieBox stream proxy — bypasses Cloudflare IP WAF block",
+  "private": true
+}
+
