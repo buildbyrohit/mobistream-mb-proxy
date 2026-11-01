@@ -22,6 +22,22 @@ export default async function handler(req, res) {
       }
     });
     const data = await mbRes.json();
+
+    const host = req.headers.host || "mobistream-mb-proxy-sigma.vercel.app";
+    const proto = req.headers["x-forwarded-proto"] || "https";
+    const baseUrl = `${proto}://${host}`;
+
+    if (data.data?.streams && Array.isArray(data.data.streams)) {
+      data.data.streams = data.data.streams.map(s => {
+        const directUrl = s.url || s.playUrl;
+        return {
+          ...s,
+          rawUrl: directUrl,
+          url: `${baseUrl}/api/proxy?url=${encodeURIComponent(directUrl)}`
+        };
+      });
+    }
+
     return res.status(200).json(data);
   } catch (err) {
     return res.status(502).json({ error: err.message });
