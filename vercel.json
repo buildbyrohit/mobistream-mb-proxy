@@ -1,12 +1,5 @@
 {
   "version": 2,
-  "name": "mobistream-mb-proxy",
-  "functions": {
-    "api/play.js": {
-      "runtime": "nodejs20.x",
-      "maxDuration": 10
-    }
-  },
   "headers": [
     {
       "source": "/api/(.*)",
@@ -17,4 +10,3 @@
     }
   ]
 }
-
